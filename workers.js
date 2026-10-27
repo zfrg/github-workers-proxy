@@ -75,6 +75,12 @@ export default {
     // 1. Handle CORS Preflight
     if (request.method === 'OPTIONS') return handleOptions(request, workerOrigin);
 
+    // Redirect the root path to the search page, keeping any query parameters.
+    if (pathname === '/') {
+      url.pathname = '/search';
+      return Response.redirect(url.toString(), 302);
+    }
+    
     // 2. Authentication Check & Token Handling
     const token = url.searchParams.get('token');
     const isTokenValid = token === PROXY_PASSWORD;
