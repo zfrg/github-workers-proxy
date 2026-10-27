@@ -238,7 +238,7 @@ export default {
       const contentType = resHeaders.get('Content-Type');
       let body = upstreamResponse.body;
 
-      if (contentType && (contentType.includes('text/html') || contentType.includes('javascript'))) {
+      if (body) {
         let text = await upstreamResponse.text();
         let modified = false;
 
