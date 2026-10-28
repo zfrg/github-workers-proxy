@@ -51,6 +51,17 @@ const LOGIN_PAGE_HTML = `
 </body>
 </html>
 `;
+
+const TEXT_CONTENT_TYPES = [
+  "text/html",
+  "text/plain",
+  "text/css",
+  "application/javascript",
+  "application/json",
+  "application/xml",
+  "text/xml",
+  "application/xhtml+xml"
+];
 // ================== END CONFIGURATION ==================
 
 export default {
@@ -244,7 +255,7 @@ export default {
       const contentType = resHeaders.get('Content-Type');
       let body = upstreamResponse.body;
 
-      if (body) {
+      if (contentType && TEXT_CONTENT_TYPES.some(type => contentType.includes(type))) {
         let text = await upstreamResponse.text();
         let modified = false;
 
